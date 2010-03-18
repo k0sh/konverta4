@@ -1,0 +1,31 @@
+application: konverta4
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+
+- url: /js
+  static_dir: js
+
+- url: /iphone.manifest
+  static_files: iphone.manifest
+  upload: iphone.manifest
+  mime_type: text/cache-manifest
+
+- url: /favicon.ico
+  static_files: images/favicon.ico
+  upload: images/favicon.ico
+
+- url: /apple-touch-icon.png
+  static_files: images/apple-touch-icon.png
+  upload: images/apple-touch-icon.png
+
+- url: /.*
+  script: konverta4.py
+

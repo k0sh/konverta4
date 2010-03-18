@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block topbar %}
+<div id="title">{{ expense.0|date:"D, d b" }}</div>
+<div id="leftnav"><a href="/">Конверт</a></div>
+{% endblock %}
+
+{% block content %}
+<span class="graytitle">Расходы за день ({{ expense.1|floatformat:2 }})</span> 
+<form name="expensesform" action="/update" method="POST" selected="true">
+    <input name="date" type="hidden" value="{{ expense.0|date:"Y-m-d" }}" />
+    <ul class="pageitem">
+        <li class="textbox"><textarea name="expr" id="detailExpenses">{{ expense.2 }}</textarea></li>
+        <li class="form"><button name="button">Сохранить</button></li>
+    </ul>
+</form>
+{% endblock %}

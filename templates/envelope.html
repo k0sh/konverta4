@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block app %}
+<script language="JavaScript" type="text/javascript">
+    function autostart()
+    {
+        if (!sessionStorage.username) {
+            window.location = "/login";
+        }
+
+        /* displayWeek(); */
+        fetchEnvelope();
+    }
+
+    function displayWeek()
+    {
+        var ul = document.getElementById("menu1");
+        var s = '<li class="textbox"><span class="header">Неделя 16 nov - 22 nov</span></li>';
+        for (var i=0; i<7; i++) {
+            s = s + '<li class="menu"><a href="#"><span class="name">Mon, 16 nov (374)</span><span class="comment">0</span><span class="arrow"></span></a></li>';        
+        }
+        ul.innerHTML = s;
+    }
+
+    function fetchEnvelope()
+    {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('GET', 'http://www.4konverta.com/data/k0sh/userinfo', true);
+        xmlhttp.setRequestHeader('4KApplication', 'Demo');
+        xmlhttp.setRequestHeader('4KAuth', 'defender12');
+	xmlhttp.withCredentials = "true";   
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    alert(xmlhttp.responseText);
+                }
+            }
+        };
+        xmlhttp.send();
+    }
+</script>
+{% endblock %}
+
+{% block topbar %}
+    <div id="title">Конверт</div>
+    <div id="leftbutton"><a href="/sync">Sync</a></div>
+    <div id="rightbutton"><a href="/login">Account</a></div>
+{% endblock %}
+
+{% block content %}
+
+    <ul id="menu1" class="pageitem">
+    <span>Loading...</span>    
+    </ul>
+{% endblock %}

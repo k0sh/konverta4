@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block app %}
+<script language="JavaScript" type="text/javascript">
+    function autostart()
+    {
+        document.getElementById('username1').value = sessionStorage.username ? sessionStorage.username : '';
+        document.getElementById('password1').value = sessionStorage.password ? sessionStorage.password : '';
+
+        window.onbeforeunload = function() {
+            return saveLogin();
+        };
+    }
+
+    function saveLogin()
+    {
+        var uname = document.getElementById("username1");
+        var pswd = document.getElementById("password1");
+        if (uname && pswd) {
+            sessionStorage.setItem("username", uname.value);
+            sessionStorage.setItem("password", pswd.value);
+        }
+        return NULL;
+    }
+</script>
+{% endblock %}
+
+{% block topbar %}
+<div id="title">Konverta4</div>
+<div id="leftnav"><a href="/">Конверт</a></div>
+{% endblock %}
+
+{% block content %}
+<span class="graytitle">Account</span>
+<ul class="pageitem">
+    <li class="form"><span class="narrow">
+            <span class="name">Username</span>
+            <input id="username1" type="text" />
+    </span></li>
+    <li class="form"><span class="narrow">
+        <span class="name">Password</span>
+        <input type="password" id="password1" />
+    </span></li>
+</ul>
+{% endblock %}
+
